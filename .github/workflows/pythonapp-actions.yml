@@ -48,8 +48,10 @@ jobs:
     steps:
       - name: Deploy to Digital Ocean droplet via SSH action
       - uses: actions/checkout@v3
-      - run: chmod 400 $SSH_KEY
-             ssh -o StrictHostKeyChecking=no -i $SSH_KEY root@64.225.97.100 "
+      - name: Chmod
+        run: chmod 400 $SSH_KEY
+      - name: Login to droplet 
+        run: ssh -o StrictHostKeyChecking=no -i $SSH_KEY root@64.225.97.100 "
                docker login -u $REGISTRY_USER -p $REGISTRY_PASS &&
                docker run -d -p 5000:5000 $IMAGE_NAME:$IMAGE_TAG"
 
