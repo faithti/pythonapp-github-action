@@ -51,7 +51,9 @@ jobs:
       - name: Chmod
         run: chmod 400 $SSH_KEY
       - name: Login to droplet 
-        run: ssh -o StrictHostKeyChecking=no -i $SSH_KEY root@64.225.97.100 "
-               docker login -u $REGISTRY_USER -p $REGISTRY_PASS &&
-               docker run -d -p 5000:5000 $IMAGE_NAME:$IMAGE_TAG"
+        run: ssh -o StrictHostKeyChecking=no -i $SSH_KEY root@64.225.97.100
+      - name: Reg
+        run: docker login -u $REGISTRY_USER -p $REGISTRY_PASS
+      - name: make container 
+        run: docker run -d -p 5000:5000 $IMAGE_NAME:$IMAGE_TAG
 
